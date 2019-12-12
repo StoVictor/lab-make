@@ -4,20 +4,22 @@ LFLAGS = -lm
 OBJS = hw_hello.o hw_power.o hw_main.o 
 EXEC = hello
 
+all: $(EXEC)
+
 $(EXEC): $(OBJS)
-	$(CC) $(LFLAGS) $(OBJS) -o $(EXEC)
+	$(CC) $(LFLAGS) $+ -o $@
 	echo hello: zbudowane!
 
-hw_hello.o: hw_hello.c hw_defs.h
-	$(CC) -c $(CFLAGS) hw_hello.c
+%.o: %.c
+	$(CC) -c $(CFLAGS) $<
 
-hw_main.o: hw_defs.h hw_hello.h hw_power.h
-	$(CC) -c $(CFLAGS) hw_main.c
-
-hw_power.o: hw_power.c hw_defs.h 
-	$(CC) -c $(CFLAGS) hw_power.c
+hw_main.o : hw_defs.h hw_hello.h hw_power.h 
+hw_hello.o: hw_defs.h 
+hw_power.o: hw_defs.h
 
 clean: 
-	rm -f *~ *.bak
+	rm -f *~
+	rm -f *.bak
 	rm -f $(EXEC) $(OBJS)
+
 .PHONY: clean
