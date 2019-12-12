@@ -7,8 +7,3 @@ hw_hello.o: hw_hello.c hw_defs.h
 
 hw_power.o: hw_power.c hw_defs.h
 	gcc -c -Wall -ansi -pedantic hw_power.c
-clean:
-	rm -f *~ 
-	rm -f *.bak 
-	rm -f hello hw_main.o hw_hello.o hw_power.o
-.PHONY: clean
